@@ -1,6 +1,8 @@
 class SessionsController < Devise::SessionsController
   respond_to :json
 
+  before_action :authenticate_user!, except: [:create]
+
   before_action :sign_in_params, only: :create
   before_action :set_user, only: :create
 
@@ -38,4 +40,14 @@ class SessionsController < Devise::SessionsController
       }, status: :failure
     end
   end
+
+  private
+  def respond_with(resource, _opts = {})
+      render json: resource
+  end
+
+  def respond_to_on_destroy
+      head :ok
+  end
+end
 end

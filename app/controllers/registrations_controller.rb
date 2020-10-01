@@ -1,6 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
+  before_action :authenticate_user!, except: [:create]
   before_action :ensure_params_exist, only: :create
 
   def create
