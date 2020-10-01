@@ -6,6 +6,8 @@ class SessionsController < Devise::SessionsController
 
   def create
     if @user.valid_password?(sign_in_params[:password])
+      byebug
+      sign_out_all_scopes
       sign_in "user", @user
       render json: {messages: 'Signed In Successfully',is_success: true,data: {user: @user}}, status: :ok
     else

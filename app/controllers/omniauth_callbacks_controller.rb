@@ -5,7 +5,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.present?
       sign_out_all_scopes
       sign_in "user", @user
-      render json: {messages: 'Signed In Successfully',is_success: true,data: {user: @user}}, status: :ok
+      token = Warden::JWTAuth::UserEncoder.new.call(@user, :user, nil)
+      render json: {messages: 'Signed In Successfully',is_success: true,data: {user: @user, token: token}}, status: :ok
     else
       render json: {messages: 'Signed In Failed - Unauthorized',is_success: false, data: {}}, status: :unauthorized
     end
