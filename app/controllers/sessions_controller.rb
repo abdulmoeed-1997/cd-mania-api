@@ -13,10 +13,6 @@ class SessionsController < Devise::SessionsController
     end
   end
 
-  def destroy
-    super
-  end
-
   private
   def sign_in_params
     params.require(:sign_in).permit :email, :password
@@ -29,11 +25,6 @@ class SessionsController < Devise::SessionsController
     else
       render json: {messages: "Cannot get User",is_success: false,data: {}}, status: :failure
     end
-  end
-
-  private
-  def respond_with(resource, _opts = {})
-      render json: resource
   end
 
   def respond_to_on_destroy
