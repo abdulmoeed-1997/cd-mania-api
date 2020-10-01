@@ -43,3 +43,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # custom
 gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'devise-jwt', '~> 0.8.0'
+gem 'omniauth', '~> 1.9', '>= 1.9.1'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
