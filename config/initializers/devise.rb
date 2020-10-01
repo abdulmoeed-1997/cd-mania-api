@@ -316,11 +316,11 @@ Devise.setup do |config|
   #jwt.secret = ENV['DEVISE_SECRET_KEY']
   jwt.secret = '9ec71d193b05ade7b6040863a607dad23f667878ed4fdd82030d9b42354b7da5d796a74ca97e06ec571a25355413e99e5439c5fba3c4deda894bcb7f28438f94'
   jwt.dispatch_requests = [
-      ['POST', %r{^/sign_in$}]
+      ['POST', %r{^/sign_in$}],
+      ['POST', %r{^/callback$}]
     ]
     jwt.revocation_requests = [
       ['DELETE', %r{^/sign_out$}]
     ]
-  jwt.expiration_time = 8.hours.to_i
 end
 end
