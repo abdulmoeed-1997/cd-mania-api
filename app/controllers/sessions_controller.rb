@@ -1,6 +1,8 @@
 class SessionsController < Devise::SessionsController
+  respond_to :json
+
   before_action :sign_in_params, only: :create
-  before_action :load_user, only: :create
+  before_action :set_user, only: :create
 
   def create
     if @user.valid_password?(sign_in_params[:password])
@@ -24,7 +26,7 @@ class SessionsController < Devise::SessionsController
     params.require(:sign_in).permit :email, :password
   end
 
-  def load_user
+  def set_user
     @user = User.find_for_database_authentication(email: sign_in_params[:email])
     if @user
       return @user
