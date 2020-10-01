@@ -1,6 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
   respond_to :json
-
   before_action :authenticate_user!, except: [:create]
   before_action :ensure_params_exist, only: :create
 
@@ -11,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
                     data: {user: user} }, status: :ok
     else
       render json: { messages: 'Sign Up Failded', is_success: false,
-                    data: {} }, status: :unprocessable_entity
+                    data: {error: user.errors} }, status: :unprocessable_entity
     end
   end
 
